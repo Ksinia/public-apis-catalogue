@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Public APIs Catalogue" />
+    <HelloWorld
+      msg="Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue Public APIs Catalogue"
+    />
   </div>
 </template>
 
@@ -11,7 +13,13 @@ import HelloWorld from "@/components/HelloWorld.vue";
 export default {
   name: "Home",
   components: {
-    HelloWorld
-  }
+    HelloWorld,
+  },
 };
 </script>
+
+<style scoped>
+.home {
+  padding-top: 2.5rem;
+}
+</style>
