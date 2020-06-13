@@ -20,9 +20,14 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "categories" */ "../views/Categories.vue"),
   },
   {
-    path: "/apis/:id",
-    name: "Details", //TODO is this name of what?
+    path: "/apis/:name",
+    name: "Details", //Why do we need this name?
     component: () => import("../views/DetailsPage.vue"),
+  },
+  {
+    path: "/random",
+    name: "Random",
+    component: () => import("../views/Random.vue"),
   },
 ];
 
