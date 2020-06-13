@@ -29,6 +29,8 @@ export default Vue.extend({
   created() {
     // fetch the data when the view is created and the data is
     // already being observed
+    this.error = this.api = null;
+    this.loading = true;
     this.fetchRandomAPI();
   },
   // watch: {
@@ -37,8 +39,6 @@ export default Vue.extend({
   // },
   methods: {
     async fetchRandomAPI() {
-      this.error = this.api = null;
-      this.loading = true;
       // replace `getPost` with your data fetching util / API wrapper
       const response = await fetch(`${url}/random`, {
         method: "GET",
