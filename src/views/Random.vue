@@ -33,23 +33,21 @@ export default Vue.extend({
     this.loading = true;
     this.fetchRandomAPI();
   },
-  // watch: {
-  //   // call again the method if the route changes
-  //   $route: "fetchRandomAPI"
-  // },
   methods: {
     async fetchRandomAPI() {
-      // replace `getPost` with your data fetching util / API wrapper
-      const response = await fetch(`${url}/random`, {
-        method: "GET",
-      });
-      this.loading = false;
-      const body = await response.json(); //.toString();
-      console.log(body);
-      if (!response.ok) {
-        this.error = body.toString(); // TODO точно тут нужен toString?
-      } else {
-        this.api = body.entries[0];
+      try {
+        const response = await fetch(`${url}/random`, {
+          method: "GET",
+        });
+        this.loading = false;
+        const body = await response.json();
+        if (!response.ok) {
+          this.error = body.toString(); // TODO точно тут нужен toString?
+        } else {
+          this.api = body.entries[0];
+        }
+      } catch (error) {
+        this.error = error;
       }
     },
   },

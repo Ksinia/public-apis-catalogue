@@ -3,7 +3,7 @@
     <h2>{{ api.API }}</h2>
     <p>Description: {{ api.Description }}</p>
     <p>Authentification: {{ api.Auth }}</p>
-    <p>HTTPS: {{ api.HTTPS }}</p>
+    <p>Supports HTTPS: {{ api.HTTPS ? "yes" : "no" }}</p>
     <p>CORS: {{ api.Cors }}</p>
     <p>
       Link:
@@ -15,11 +15,20 @@
 
 <script lang="ts">
 import Vue from "vue";
+type Api = {
+  API: String;
+  Description: String;
+  Auth: String;
+  HTTPS: Boolean;
+  Cors: String;
+  Link: String;
+  Category: String;
+};
 
 export default Vue.extend({
   name: "SingleAPI",
   props: {
-    api: Object,
+    api: Object as Vue.PropType<Api>,
   },
 });
 </script>
