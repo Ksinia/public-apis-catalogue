@@ -9,8 +9,9 @@
       <SingleAPI
         v-for="api in apis.slice(0 + (currentPage - 1) * 10, currentPage * 10)"
         v-bind:api="api"
-        v-bind:key="api.name"
-      ></SingleAPI>
+        v-bind:key="api.API"
+        @click.native="redirectToDetailsPage(api.API)"
+      />
       <div class="pages">
         <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
@@ -68,6 +69,11 @@ export default {
       } catch (error) {
         this.error = error;
       }
+    },
+    redirectToDetailsPage(apiName) {
+      this.$router.push({
+        path: `/apis/${apiName}`,
+      });
     },
     nextPage() {
       this.$router.push(`?page=${this.currentPage + 1}`);

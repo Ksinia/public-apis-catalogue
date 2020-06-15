@@ -20,7 +20,7 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "categories" */ "../views/Categories.vue"),
   },
   {
-    path: "/apis/:name",
+    path: "/apis/:title",
     name: "Details", //Why do we need this name?
     component: () => import("../views/DetailsPage.vue"),
   },

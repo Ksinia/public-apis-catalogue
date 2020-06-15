@@ -16,13 +16,13 @@
 <script lang="ts">
 import Vue from "vue";
 type Api = {
-  API: String;
-  Description: String;
-  Auth: String;
-  HTTPS: Boolean;
-  Cors: String;
-  Link: String;
-  Category: String;
+  API: string;
+  Description: string;
+  Auth: string;
+  HTTPS: boolean;
+  Cors: string;
+  Link: string;
+  Category: string;
 };
 
 export default Vue.extend({
@@ -30,6 +30,13 @@ export default Vue.extend({
   props: {
     api: Object as Vue.PropType<Api>,
   },
+  // methods: {
+  //   redirectToDetailsPage() {
+  //     this.$router.push({
+  //       path: `/apis/${this.api.API}`,
+  //     });
+  //   },
+  // },
 });
 </script>
 
