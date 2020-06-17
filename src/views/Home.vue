@@ -13,7 +13,7 @@
             currentPage * 10
           )"
           v-bind:api="api"
-          v-bind:key="api.API"
+          v-bind:key="api.Link"
         />
       </div>
       <div class="pages">
@@ -57,9 +57,7 @@ export default {
   methods: {
     async fetchAllAPIs() {
       try {
-        const response = await fetch(`${url}/entries`, {
-          method: "GET",
-        });
+        const response = await fetch(`${url}/entries`);
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {

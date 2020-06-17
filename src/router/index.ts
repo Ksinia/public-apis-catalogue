@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/DetailsPage.vue"),
   },
   {
+    path: "/category/:category",
+    name: "Category",
+    component: () => import("../views/Category.vue"),
+  },
+  {
     path: "/random",
     name: "Random",
     component: () => import("../views/Random.vue"),

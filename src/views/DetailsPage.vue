@@ -51,7 +51,7 @@ export default {
     async fetchAPI() {
       try {
         const response = await fetch(
-          `${url}/entries?title=${this.$route.params.title}`
+          `${url}/entries?title=${encodeURIComponent(this.$route.params.title)}`
         );
         this.loading = false;
         const body = await response.json();
@@ -60,7 +60,7 @@ export default {
         } else {
           this.api = body.entries[0];
           const response2 = await fetch(
-            `${url}/entries?category=${this.api.Category}`
+            `${url}/entries?category=${encodeURIComponent(this.api.Category)}`
           );
           const body2 = await response2.json();
           if (!response.ok) {
