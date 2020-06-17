@@ -5,13 +5,17 @@
 
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div v-if="apis.length > 0" class="content">
-      <SingleAPI
-        v-for="api in apis.slice(0 + (currentPage - 1) * 10, currentPage * 10)"
-        v-bind:api="api"
-        v-bind:key="api.API"
-        @click.native="redirectToDetailsPage(api.API)"
-      />
+    <div v-if="apis.length > 0">
+      <div class="content">
+        <SingleAPI
+          v-for="api in apis.slice(
+            0 + (currentPage - 1) * 10,
+            currentPage * 10
+          )"
+          v-bind:api="api"
+          v-bind:key="api.API"
+        />
+      </div>
       <div class="pages">
         <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
@@ -70,11 +74,6 @@ export default {
         this.error = error;
       }
     },
-    redirectToDetailsPage(apiName) {
-      this.$router.push({
-        path: `/apis/${apiName}`,
-      });
-    },
     nextPage() {
       this.$router.push(`?page=${this.currentPage + 1}`);
     },
@@ -105,5 +104,10 @@ export default {
 .pages button {
   margin: 1rem;
   color: #2c3e50;
+}
+.content {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 }
 </style>

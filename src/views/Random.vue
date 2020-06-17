@@ -1,12 +1,11 @@
 <template>
   <div class="random">
-    <h1>Random API</h1>
     <div v-if="loading" class="loading">Loading...</div>
 
     <div v-if="error" class="error">{{ error }}</div>
 
     <div v-if="api" class="content">
-      <SingleAPI v-bind:api="api" />
+      <SingleAPIDetails v-bind:api="api" />
     </div>
     <button v-on:click="fetchRandomAPI">Another random API</button>
   </div>
@@ -15,7 +14,7 @@
 <script lang="ts">
 import url from "@/url";
 import Vue from "vue";
-import SingleAPI from "@/components/SingleAPI.vue";
+import SingleAPIDetails from "@/components/SingleAPIDetails.vue";
 
 export default Vue.extend({
   name: "Random",
@@ -52,7 +51,7 @@ export default Vue.extend({
     },
   },
   components: {
-    SingleAPI,
+    SingleAPIDetails,
   },
 });
 </script>
