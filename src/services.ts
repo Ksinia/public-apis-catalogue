@@ -15,7 +15,10 @@ type Options = {
   Category: string[];
 };
 
-export const getOptions = (apis: Api[]): Options => {
+/**
+ * Gets all possible options for a certain properties of all APIs
+ */
+export function getOptions(apis: Api[]): Options {
   return apis.reduce(
     (acc: Options, api: Api) => {
       if (!acc.Auth.includes(api.Auth)) {
@@ -36,9 +39,12 @@ export const getOptions = (apis: Api[]): Options => {
       Category: ["all"],
     }
   );
-};
+}
 
-export const filterApis = (
+/**
+ * Filters the APIs according to set filters
+ */
+export function filterApis(
   apis: Api[],
   filters: {
     Auth: string;
@@ -46,7 +52,7 @@ export const filterApis = (
     Cors: string;
     Category: string;
   }
-): Api[] => {
+): Api[] {
   return apis
     .filter((api: Api): boolean => {
       if (filters.Auth === "all") {
@@ -76,4 +82,4 @@ export const filterApis = (
         return api.Category === filters.Category;
       }
     });
-};
+}
