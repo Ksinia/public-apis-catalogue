@@ -5,10 +5,19 @@
 
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div v-if="apis.length > 0">
+    <div class="selectors">
+      <DropDown
+        v-for="property in Object.keys(options)"
+        v-bind:key="property"
+        v-bind:options="options[property]"
+        v-bind:property="property"
+        @change="setFilter"
+      />
+    </div>
+    <div v-if="filteredApis.length > 0">
       <div class="content">
         <SingleAPI
-          v-for="api in apis.slice(
+          v-for="api in filteredApis.slice(
             0 + (currentPage - 1) * 10,
             currentPage * 10
           )"
@@ -19,9 +28,7 @@
       <div class="pages">
         <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
-        <button v-if="currentPage < totalPages" v-on:click="nextPage">
-          Next
-        </button>
+        <button v-if="currentPage < totalPages" v-on:click="nextPage">Next</button>
       </div>
     </div>
   </div>
@@ -30,12 +37,15 @@
 <script>
 // @ is an alias to /src
 import SingleAPI from "@/components/SingleAPI.vue";
+import DropDown from "@/components/Dropdown.vue";
 import url from "@/url";
+import {getOptions, filterApis} from "@/services"
 
 export default {
   name: "Home",
   components: {
     SingleAPI,
+    DropDown,
   },
   data() {
     return {
@@ -43,9 +53,19 @@ export default {
       apis: [],
       error: null,
       currentPage: parseInt(this.$route.query.page) || 1,
-      totalPages: 0,
+      filters: {
+      Auth: "all",
+      HTTPS: "all",
+      Cors: "all",
+      Category: "all",
+    }
     };
   },
+  computed: {
+    options: function () {return getOptions(this.apis)},
+    filteredApis: function() {return filterApis(this.apis, this.filters)},
+    totalPages: function() {return Math.ceil(this.filteredApis.length / 10)}
+    },
   async created() {
     // fetch the data when the view is created and the data is
     // already being observed
@@ -61,12 +81,11 @@ export default {
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {
-          this.error = body.toString(); // TODO точно тут нужен toString?
+          this.error = body.toString();
         } else if (body.count === 0) {
           this.error = "no apis";
         } else {
           this.apis = body.entries;
-          this.totalPages = Math.ceil(body.count / 10);
         }
       } catch (error) {
         this.error = error;
@@ -81,11 +100,16 @@ export default {
     getCurrentPage() {
       this.currentPage = parseInt(this.$route.query.page) || 1;
     },
+    setFilter(event) {
+      this.filters[event.target.name] = event.target.value
+    }
   },
   watch: {
-    // call again the method if the route changes
+    // call the method if the route changes
     $route: "getCurrentPage",
-  },
+  
+    filteredApis: function() {if (this.$route.query.page) {this.$router.push("/")}}
+    }
 };
 </script>
 
@@ -107,5 +131,10 @@ export default {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
+}
+.selectors {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
 </style>

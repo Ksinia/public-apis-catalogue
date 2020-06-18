@@ -10,11 +10,7 @@
     <div v-if="relevantApis.length > 0">
       <h1>{{ relevantApis.length }} relevant APIs</h1>
       <div class="additional-content">
-        <SingleAPI
-          v-for="api in relevantApis"
-          v-bind:api="api"
-          v-bind:key="api.API"
-        />
+        <SingleAPI v-for="api in relevantApis" v-bind:api="api" v-bind:key="api.API" />
       </div>
     </div>
   </div>
@@ -56,7 +52,7 @@ export default {
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {
-          this.error = body.toString(); // TODO точно тут нужен toString?
+          this.error = body.toString();
         } else {
           this.api = body.entries[0];
           const response2 = await fetch(
@@ -64,7 +60,7 @@ export default {
           );
           const body2 = await response2.json();
           if (!response.ok) {
-            this.error = body2.toString(); // TODO точно тут нужен toString?
+            this.error = body2.toString();
           } else {
             this.relevantApis = body2.entries
               .filter((entry) => entry.API !== this.api.API)

@@ -8,11 +8,7 @@
       <div v-if="apis.length > 0">
         <h1>APIs in the category "{{ this.$route.params.category }}"</h1>
         <div class="content">
-          <SingleAPI
-            v-for="api in apis"
-            v-bind:api="api"
-            v-bind:key="api.Link"
-          />
+          <SingleAPI v-for="api in apis" v-bind:api="api" v-bind:key="api.Link" />
         </div>
       </div>
     </div>
@@ -56,7 +52,7 @@ export default {
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {
-          this.error = body.toString(); // TODO точно тут нужен toString?
+          this.error = body.toString();
         } else {
           this.apis = body.entries;
         }

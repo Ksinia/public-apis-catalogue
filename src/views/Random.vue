@@ -41,7 +41,7 @@ export default Vue.extend({
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {
-          this.error = body.toString(); // TODO точно тут нужен toString?
+          this.error = body.toString();
         } else {
           this.api = body.entries[0];
         }

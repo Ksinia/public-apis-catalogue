@@ -8,9 +8,11 @@
     <div v-if="categories.length > 0" class="content">
       <ul>
         <li v-for="category in categories" v-bind:key="category">
-          <a v-bind:href="'/category/' + encodeURIComponent(category)">{{
+          <a v-bind:href="'/category/' + encodeURIComponent(category)">
+            {{
             category
-          }}</a>
+            }}
+          </a>
         </li>
       </ul>
     </div>
@@ -44,7 +46,7 @@ export default {
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {
-          this.error = body.toString(); // TODO точно тут нужен toString?
+          this.error = body.toString()
         } else if (body.length === 0) {
           this.error = "no categories";
         } else {

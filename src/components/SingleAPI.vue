@@ -5,25 +5,13 @@
     <p>Authentification: {{ api.Auth }}</p>
     <p>Supports HTTPS: {{ api.HTTPS ? "yes" : "no" }}</p>
     <p>CORS: {{ api.Cors }}</p>
-    <!-- <p>
-      Link:
-      <a v-bind:href="api.Link">{{ api.Link }}</a>
-    </p> -->
     <p>Category: {{ api.Category }}</p>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-type Api = {
-  API: string;
-  Description: string;
-  Auth: string;
-  HTTPS: boolean;
-  Cors: string;
-  Link: string;
-  Category: string;
-};
+import { Api } from "@/services";
 
 export default Vue.extend({
   name: "SingleAPI",
