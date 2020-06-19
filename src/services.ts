@@ -10,7 +10,7 @@ export type Api = {
 
 type Options = {
   Auth: string[];
-  HTTPS: ["all", true, false];
+  HTTPS: ['all', true, false];
   Cors: string[];
   Category: string[];
 };
@@ -33,10 +33,10 @@ export function getOptions(apis: Api[]): Options {
       return acc;
     },
     {
-      Auth: ["all"],
-      HTTPS: ["all", true, false],
-      Cors: ["all"],
-      Category: ["all"],
+      Auth: ['all'],
+      HTTPS: ['all', true, false],
+      Cors: ['all'],
+      Category: ['all'],
     }
   );
 }
@@ -51,35 +51,23 @@ export function filterApis(
     HTTPS: string | boolean;
     Cors: string;
     Category: string;
-  }
+  },
+  sortingAscending: boolean
 ): Api[] {
-  return apis
-    .filter((api: Api): boolean => {
-      if (filters.Auth === "all") {
-        return true;
-      } else {
-        return api.Auth === filters.Auth;
-      }
-    })
-    .filter((api: Api): boolean => {
-      if (filters.HTTPS === "all") {
-        return true;
-      } else {
-        return api.HTTPS.toString() === filters.HTTPS.toString();
-      }
-    })
-    .filter((api: Api): boolean => {
-      if (filters.Cors === "all") {
-        return true;
-      } else {
-        return api.Cors === filters.Cors;
-      }
-    })
-    .filter((api: Api): boolean => {
-      if (filters.Category === "all") {
-        return true;
-      } else {
-        return api.Category === filters.Category;
-      }
-    });
+  const filtered = apis.filter((api: Api): boolean => {
+    if (
+      Object.keys(filters).some((f: string) => {
+        return filters[f] !== 'all' && filters[f] !== api[f];
+      })
+    ) {
+      return false;
+    }
+    return true;
+  });
+  if (sortingAscending) {
+    filtered.sort();
+  } else {
+    filtered.reverse();
+  }
+  return filtered;
 }

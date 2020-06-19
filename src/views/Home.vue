@@ -5,7 +5,7 @@
 
     <div v-if="error" class="error">{{ error }}</div>
 
-    <div class="selectors">
+    <div class="filters">
       <DropDown
         v-for="property in Object.keys(options)"
         v-bind:key="property"
@@ -13,6 +13,15 @@
         v-bind:property="property"
         @change="setFilter"
       />
+      <div class="sorting">
+        <span>Sort:</span>
+        <button @click="sortAscending" :disabled="sortingAscending">
+          a-z
+        </button>
+        <button @click="sortDescending" :disabled="!sortingAscending">
+          z-a
+        </button>
+      </div>
     </div>
     <div v-if="filteredApis.length > 0">
       <div class="content">
@@ -26,9 +35,13 @@
         />
       </div>
       <div class="pages">
-        <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
+        <button v-if="currentPage > 1" v-on:click="prevPage">
+          Previous
+        </button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
-        <button v-if="currentPage < totalPages" v-on:click="nextPage">Next</button>
+        <button v-if="currentPage < totalPages" v-on:click="nextPage">
+          Next
+        </button>
       </div>
     </div>
   </div>
@@ -36,13 +49,13 @@
 
 <script>
 // @ is an alias to /src
-import SingleAPI from "@/components/SingleAPI.vue";
-import DropDown from "@/components/Dropdown.vue";
-import url from "@/url";
-import {getOptions, filterApis} from "@/services"
+import SingleAPI from '@/components/SingleAPI.vue';
+import DropDown from '@/components/Dropdown.vue';
+import url from '@/url';
+import { getOptions, filterApis } from '@/services';
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     SingleAPI,
     DropDown,
@@ -54,18 +67,25 @@ export default {
       error: null,
       currentPage: parseInt(this.$route.query.page) || 1,
       filters: {
-      Auth: "all",
-      HTTPS: "all",
-      Cors: "all",
-      Category: "all",
-    }
+        Auth: 'all',
+        HTTPS: 'all',
+        Cors: 'all',
+        Category: 'all',
+      },
+      sortingAscending: true,
     };
   },
   computed: {
-    options: function () {return getOptions(this.apis)},
-    filteredApis: function() {return filterApis(this.apis, this.filters)},
-    totalPages: function() {return Math.ceil(this.filteredApis.length / 10)}
+    options: function () {
+      return getOptions(this.apis);
     },
+    filteredApis: function () {
+      return filterApis(this.apis, this.filters, this.sortingAscending);
+    },
+    totalPages: function () {
+      return Math.ceil(this.filteredApis.length / 10);
+    },
+  },
   async created() {
     // fetch the data when the view is created and the data is
     // already being observed
@@ -83,7 +103,7 @@ export default {
         if (!response.ok) {
           this.error = body.toString();
         } else if (body.count === 0) {
-          this.error = "no apis";
+          this.error = 'no apis';
         } else {
           this.apis = body.entries;
         }
@@ -101,15 +121,28 @@ export default {
       this.currentPage = parseInt(this.$route.query.page) || 1;
     },
     setFilter(event) {
-      this.filters[event.target.name] = event.target.value
-    }
+      this.filters[event.target.name] = event.target.value;
+    },
+    sortAscending() {
+      console.log('sort');
+      this.sortingAscending = true;
+      console.log(this.filteredApis[0].API);
+    },
+    sortDescending() {
+      this.sortingAscending = false;
+      console.log(this.filteredApis[0].API);
+    },
   },
   watch: {
     // call the method if the route changes
-    $route: "getCurrentPage",
-  
-    filteredApis: function() {if (this.$route.query.page) {this.$router.push("/")}}
-    }
+    $route: 'getCurrentPage',
+
+    filteredApis: function () {
+      if (this.$route.query.page) {
+        this.$router.push('/');
+      }
+    },
+  },
 };
 </script>
 
@@ -132,9 +165,12 @@ export default {
   flex-flow: row wrap;
   justify-content: space-evenly;
 }
-.selectors {
+.filters {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+}
+.sorting > * {
+  margin: 0 0.2rem;
 }
 </style>

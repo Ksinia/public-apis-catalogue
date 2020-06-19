@@ -10,16 +10,20 @@
     <div v-if="relevantApis.length > 0">
       <h1>{{ relevantApis.length }} relevant APIs</h1>
       <div class="additional-content">
-        <SingleAPI v-for="api in relevantApis" v-bind:api="api" v-bind:key="api.API" />
+        <SingleAPI
+          v-for="api in relevantApis"
+          v-bind:api="api"
+          v-bind:key="api.API"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import SingleAPI from "@/components/SingleAPI.vue";
-import SingleAPIDetails from "@/components/SingleAPIDetails.vue";
-import url from "@/url";
+import SingleAPI from '@/components/SingleAPI.vue';
+import SingleAPIDetails from '@/components/SingleAPIDetails.vue';
+import url from '@/url';
 
 export default {
   data() {
@@ -32,7 +36,7 @@ export default {
   },
   watch: {
     // call again the method if the route changes
-    "$route.params.title": function () {
+    '$route.params.title': function () {
       this.fetchAPI();
     },
   },
@@ -73,7 +77,7 @@ export default {
     },
   },
 
-  name: "DetailsPage",
+  name: 'DetailsPage',
   components: {
     SingleAPI,
     SingleAPIDetails,
