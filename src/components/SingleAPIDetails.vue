@@ -12,7 +12,7 @@
       </tr>
       <tr>
         <td>HTTPS support:</td>
-        <td class="centered">{{ api.HTTPS ? "yes" : "no" }}</td>
+        <td class="centered">{{ api.HTTPS ? 'yes' : 'no' }}</td>
       </tr>
       <tr>
         <td>CORS:</td>
@@ -27,7 +27,9 @@
       <tr>
         <td>Category:</td>
         <td class="centered">
-          <router-link v-bind:to="/category/ + api.Category">{{ api.Category }}</router-link>
+          <router-link v-bind:to="/category/ + api.Category">{{
+            api.Category
+          }}</router-link>
         </td>
       </tr>
     </table>
@@ -35,19 +37,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-type Api = {
-  API: string;
-  Description: string;
-  Auth: string;
-  HTTPS: boolean;
-  Cors: string;
-  Link: string;
-  Category: string;
-};
+import Vue from 'vue';
+import { Api } from '../services';
 
 export default Vue.extend({
-  name: "SingleAPIDetails",
+  name: 'SingleAPIDetails',
   props: {
     api: Object as Vue.PropType<Api>,
   },

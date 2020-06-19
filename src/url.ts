@@ -1,1 +1,1 @@
-export default "https://api.publicapis.org";
+export default 'https://api.publicapis.org';

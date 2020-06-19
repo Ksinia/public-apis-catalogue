@@ -8,28 +8,34 @@
       <div v-if="apis.length > 0">
         <h1>APIs in the category "{{ this.$route.params.category }}"</h1>
         <div class="content">
-          <SingleAPI v-for="api in apis" v-bind:api="api" v-bind:key="api.Link" />
+          <SingleAPI
+            v-for="api in apis"
+            v-bind:api="api"
+            v-bind:key="api.Link"
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-import SingleAPI from "@/components/SingleAPI.vue";
-import url from "@/url";
+<script lang="ts">
+import Vue from 'vue';
+import SingleAPI from '@/components/SingleAPI.vue';
+import url from '@/url';
+import { Api } from '../services';
 
-export default {
+export default Vue.extend({
   data() {
     return {
       loading: false,
-      apis: [],
-      error: null,
+      apis: [] as Api[],
+      error: null as null | string,
     };
   },
   watch: {
     // call again the method if the route changes
-    "$route.params.category": function () {
+    '$route.params.category': function () {
       this.fetchCategoryAPIs();
     },
   },
@@ -62,11 +68,11 @@ export default {
     },
   },
 
-  name: "Category",
+  name: 'Category',
   components: {
     SingleAPI,
   },
-};
+});
 </script>
 
 <style scoped>

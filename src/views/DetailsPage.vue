@@ -20,18 +20,20 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import SingleAPI from '@/components/SingleAPI.vue';
 import SingleAPIDetails from '@/components/SingleAPIDetails.vue';
 import url from '@/url';
+import { Api } from '../services';
 
-export default {
+export default Vue.extend({
   data() {
     return {
       loading: false,
-      api: null,
-      error: null,
-      relevantApis: [],
+      api: null as null | Api,
+      error: null as null | string,
+      relevantApis: [] as Api[],
     };
   },
   watch: {
@@ -59,15 +61,18 @@ export default {
           this.error = body.toString();
         } else {
           this.api = body.entries[0];
-          const response2 = await fetch(
-            `${url}/entries?category=${encodeURIComponent(this.api.Category)}`
-          );
-          const body2 = await response2.json();
+
+          const response2 =
+            this.api &&
+            (await fetch(
+              `${url}/entries?category=${encodeURIComponent(this.api.Category)}`
+            ));
+          const body2 = response2 && (await response2.json());
           if (!response.ok) {
             this.error = body2.toString();
           } else {
             this.relevantApis = body2.entries
-              .filter((entry) => entry.API !== this.api.API)
+              .filter((entry: Api) => entry.API !== (this.api && this.api.API))
               .slice(0, 3);
           }
         }
@@ -82,7 +87,7 @@ export default {
     SingleAPI,
     SingleAPIDetails,
   },
-};
+});
 </script>
 
 <style scoped>

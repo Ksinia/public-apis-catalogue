@@ -15,9 +15,7 @@
       />
       <div class="sorting">
         <span>Sort:</span>
-        <button @click="sortAscending" :disabled="sortingAscending">
-          a-z
-        </button>
+        <button @click="sortAscending" :disabled="sortingAscending">a-z</button>
         <button @click="sortDescending" :disabled="!sortingAscending">
           z-a
         </button>
@@ -35,9 +33,7 @@
         />
       </div>
       <div class="pages">
-        <button v-if="currentPage > 1" v-on:click="prevPage">
-          Previous
-        </button>
+        <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
         <button v-if="currentPage < totalPages" v-on:click="nextPage">
           Next
@@ -47,14 +43,15 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 // @ is an alias to /src
 import SingleAPI from '@/components/SingleAPI.vue';
 import DropDown from '@/components/Dropdown.vue';
 import url from '@/url';
-import { getOptions, filterApis } from '@/services';
+import { getOptions, filterApis, Api, Options, Filters } from '@/services';
 
-export default {
+export default Vue.extend({
   name: 'Home',
   components: {
     SingleAPI,
@@ -63,26 +60,28 @@ export default {
   data() {
     return {
       loading: false,
-      apis: [],
-      error: null,
-      currentPage: parseInt(this.$route.query.page) || 1,
+      apis: [] as Api[],
+      error: null as null | string,
+      currentPage:
+        parseInt(this.$route.query.page && this.$route.query.page.toString()) ||
+        1,
       filters: {
         Auth: 'all',
         HTTPS: 'all',
         Cors: 'all',
         Category: 'all',
-      },
+      } as Filters,
       sortingAscending: true,
     };
   },
   computed: {
-    options: function () {
+    options: function (): Options {
       return getOptions(this.apis);
     },
-    filteredApis: function () {
+    filteredApis: function (): Api[] {
       return filterApis(this.apis, this.filters, this.sortingAscending);
     },
-    totalPages: function () {
+    totalPages: function (): number {
       return Math.ceil(this.filteredApis.length / 10);
     },
   },
@@ -118,19 +117,22 @@ export default {
       this.$router.push(`?page=${this.currentPage - 1}`);
     },
     getCurrentPage() {
-      this.currentPage = parseInt(this.$route.query.page) || 1;
+      this.currentPage = this.$route.query.page
+        ? parseInt(this.$route.query.page.toString())
+        : 1;
     },
-    setFilter(event) {
-      this.filters[event.target.name] = event.target.value;
+    setFilter(name: string, value: string) {
+      if (name !== 'HTTPS') {
+        this.filters[name] = value;
+      } else {
+        this.filters[name] = value === 'true';
+      }
     },
     sortAscending() {
-      console.log('sort');
       this.sortingAscending = true;
-      console.log(this.filteredApis[0].API);
     },
     sortDescending() {
       this.sortingAscending = false;
-      console.log(this.filteredApis[0].API);
     },
   },
   watch: {
@@ -143,7 +145,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style scoped>

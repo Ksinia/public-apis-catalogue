@@ -2,17 +2,23 @@ export type Api = {
   API: string;
   Description: string;
   Auth: string;
-  HTTPS: boolean;
+  [HTTPS: string]: string | boolean;
   Cors: string;
   Link: string;
   Category: string;
 };
 
-type Options = {
+export type Options = {
   Auth: string[];
   HTTPS: ['all', true, false];
   Cors: string[];
   Category: string[];
+};
+export type Filters = {
+  Auth: string;
+  [HTTPS: string]: string | boolean;
+  Cors: string;
+  Category: string;
 };
 
 /**
@@ -46,12 +52,7 @@ export function getOptions(apis: Api[]): Options {
  */
 export function filterApis(
   apis: Api[],
-  filters: {
-    Auth: string;
-    HTTPS: string | boolean;
-    Cors: string;
-    Category: string;
-  },
+  filters: Filters,
   sortingAscending: boolean
 ): Api[] {
   const filtered = apis.filter((api: Api): boolean => {

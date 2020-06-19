@@ -3,18 +3,18 @@
     <h2>{{ api.API }}</h2>
     <p>Description: {{ api.Description }}</p>
     <p>Authentification: {{ api.Auth }}</p>
-    <p>Supports HTTPS: {{ api.HTTPS ? "yes" : "no" }}</p>
+    <p>Supports HTTPS: {{ api.HTTPS ? 'yes' : 'no' }}</p>
     <p>CORS: {{ api.Cors }}</p>
     <p>Category: {{ api.Category }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import { Api } from "@/services";
+import Vue from 'vue';
+import { Api } from '@/services';
 
 export default Vue.extend({
-  name: "SingleAPI",
+  name: 'SingleAPI',
   props: {
     api: Object as Vue.PropType<Api>,
   },

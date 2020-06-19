@@ -12,17 +12,18 @@
 </template>
 
 <script lang="ts">
-import url from "@/url";
-import Vue from "vue";
-import SingleAPIDetails from "@/components/SingleAPIDetails.vue";
+import url from '@/url';
+import Vue from 'vue';
+import SingleAPIDetails from '@/components/SingleAPIDetails.vue';
+import { Api } from '../services';
 
 export default Vue.extend({
-  name: "Random",
+  name: 'Random',
   data() {
     return {
       loading: false,
-      api: null,
-      error: null,
+      api: null as null | Api,
+      error: null as null | string,
     };
   },
   created() {
@@ -36,7 +37,7 @@ export default Vue.extend({
     async fetchRandomAPI() {
       try {
         const response = await fetch(`${url}/random`, {
-          method: "GET",
+          method: 'GET',
         });
         this.loading = false;
         const body = await response.json();

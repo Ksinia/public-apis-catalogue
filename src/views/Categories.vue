@@ -9,9 +9,7 @@
       <ul>
         <li v-for="category in categories" v-bind:key="category">
           <a v-bind:href="'/category/' + encodeURIComponent(category)">
-            {{
-            category
-            }}
+            {{ category }}
           </a>
         </li>
       </ul>
@@ -19,16 +17,17 @@
   </div>
 </template>
 
-<script>
-import url from "@/url";
+<script lang="ts">
+import Vue from 'vue';
+import url from '@/url';
 
-export default {
-  name: "Categories",
+export default Vue.extend({
+  name: 'Categories',
   data() {
     return {
       loading: false,
-      categories: [],
-      error: null,
+      categories: [] as string[],
+      error: null as null | string,
     };
   },
   async created() {
@@ -46,9 +45,9 @@ export default {
         this.loading = false;
         const body = await response.json();
         if (!response.ok) {
-          this.error = body.toString()
+          this.error = body.toString();
         } else if (body.length === 0) {
-          this.error = "no categories";
+          this.error = 'no categories';
         } else {
           this.categories = body;
         }
@@ -57,7 +56,7 @@ export default {
       }
     },
   },
-};
+});
 </script>
 
 <style scoped>
