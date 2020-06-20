@@ -33,7 +33,7 @@ const getRoutesList = () => {
   const categories = fetchCategories();
   const apis = fetchApis();
   return routes
-    .concat(categories.map((cat) => `category/${encodeURIComponent(cat)}`))
+    .concat(categories.map((cat) => `categories/${encodeURIComponent(cat)}`))
     .concat(apis.map((api) => `apis/${encodeURIComponent(api)}`));
 };
 
