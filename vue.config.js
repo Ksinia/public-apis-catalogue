@@ -1,6 +1,8 @@
 const SitemapPlugin = require('sitemap-webpack-plugin').default;
 const request = require('sync-request');
 const url = 'https://api.publicapis.org';
+const frontendUrl = process.env.VUE_APP_URL || 'http://localhost:4000';
+
 const routes = ['/', '/categories', '/random'];
 
 const fetchCategories = () => {
@@ -36,10 +38,9 @@ const getRoutesList = () => {
 };
 
 const paths = getRoutesList();
-console.log('Paths by the time of start: ', paths);
 
 module.exports = {
   configureWebpack: {
-    plugins: [new SitemapPlugin('http://localhost:8080', paths, {})],
+    plugins: [new SitemapPlugin(frontendUrl, paths, {})],
   },
 };

@@ -8,7 +8,7 @@
     <router-view />
     <footer>
       Copyright ©
-      <a href="https://ksinia.net/cv/">Ksenia Gulyaeva</a>
+      <a href="https://ksinia.net/cv/gulyaeva.html">Ksenia Gulyaeva</a>
       {{ new Date().getFullYear() }}
       |
       <a href="https://github.com/Ksinia/public-apis-catalogue">Source Code</a>
