@@ -8,7 +8,7 @@
     <div v-if="categories.length > 0" class="content">
       <ul>
         <li v-for="category in categories" v-bind:key="category">
-          <a v-bind:href="'/category/' + encodeURIComponent(category)">
+          <a v-bind:href="'/categories/' + encodeURIComponent(category)">
             {{ category }}
           </a>
         </li>

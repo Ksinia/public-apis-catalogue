@@ -6,6 +6,15 @@
       <router-link to="/random">Random API</router-link>
     </div>
     <router-view />
+    <footer>
+      Copyright ©
+      <a href="https://ksinia.net/cv/">Ksenia Gulyaeva</a>
+      {{ new Date().getFullYear() }}
+      |
+      <a href="https://github.com/Ksinia/public-apis-catalogue">Source Code</a>
+      |
+      <a href="/sitemap.xml">Sitemap</a>
+    </footer>
   </div>
 </template>
 
@@ -38,6 +47,15 @@ body {
 }
 
 #nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: grey;
+}
+a {
   color: #42b983;
 }
 </style>
