@@ -28,9 +28,7 @@
         <td>Category:</td>
         <td class="centered">
           <router-link v-bind:to="/categories/ + api.Category">
-            {{
-            api.Category
-            }}
+            {{ api.Category }}
           </router-link>
         </td>
       </tr>

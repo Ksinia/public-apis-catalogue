@@ -11,9 +11,7 @@
       <a href="https://ksinia.net/cv/gulyaeva.html">Ksenia Gulyaeva</a>
       {{ new Date().getFullYear() }}
       |
-      <a
-        href="https://github.com/Ksinia/public-apis-catalogue"
-      >Source Code</a>
+      <a href="https://github.com/Ksinia/public-apis-catalogue">Source Code</a>
       |
       <a href="/sitemap.xml">Sitemap</a>
     </footer>

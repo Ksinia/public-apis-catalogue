@@ -8,14 +8,17 @@
     <div v-if="categories.length > 0" class="content">
       <div class="tag" v-for="category in categories" v-bind:key="category">
         <a
-          v-bind:style="{'color': stringToColour(category), 'font-size': (fontSizes[category] + 'px') || '14px'}"
+          v-bind:style="{
+            color: stringToColour(category),
+            'font-size': fontSizes[category] + 'px' || '14px',
+          }"
           v-bind:href="'/categories/' + encodeURIComponent(category)"
-        >{{ category }}</a>
+          >{{ category }}</a
+        >
       </div>
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import Vue from 'vue';

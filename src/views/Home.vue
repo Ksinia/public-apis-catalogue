@@ -16,7 +16,9 @@
       <div class="sorting">
         <span>Sort:</span>
         <button @click="sortAscending" :disabled="sortingAscending">a-z</button>
-        <button @click="sortDescending" :disabled="!sortingAscending">z-a</button>
+        <button @click="sortDescending" :disabled="!sortingAscending">
+          z-a
+        </button>
       </div>
     </div>
     <div v-if="filteredApis.length > 0">
@@ -33,7 +35,9 @@
       <div class="pages">
         <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
-        <button v-if="currentPage < totalPages" v-on:click="nextPage">Next</button>
+        <button v-if="currentPage < totalPages" v-on:click="nextPage">
+          Next
+        </button>
       </div>
     </div>
   </div>
