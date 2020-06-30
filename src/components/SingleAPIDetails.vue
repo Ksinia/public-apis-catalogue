@@ -21,15 +21,17 @@
       <tr>
         <td>Link:</td>
         <td class="centered">
-          <a v-bind:href="api.Link">{{ api.Link }}</a>
+          <a v-bind:href="api.Link" target="_blank">{{ api.Link }}</a>
         </td>
       </tr>
       <tr>
         <td>Category:</td>
         <td class="centered">
-          <router-link v-bind:to="/categories/ + api.Category">{{
+          <router-link v-bind:to="/categories/ + api.Category">
+            {{
             api.Category
-          }}</router-link>
+            }}
+          </router-link>
         </td>
       </tr>
     </table>

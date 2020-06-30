@@ -16,9 +16,7 @@
       <div class="sorting">
         <span>Sort:</span>
         <button @click="sortAscending" :disabled="sortingAscending">a-z</button>
-        <button @click="sortDescending" :disabled="!sortingAscending">
-          z-a
-        </button>
+        <button @click="sortDescending" :disabled="!sortingAscending">z-a</button>
       </div>
     </div>
     <div v-if="filteredApis.length > 0">
@@ -35,9 +33,7 @@
       <div class="pages">
         <button v-if="currentPage > 1" v-on:click="prevPage">Previous</button>
         <p>Page {{ currentPage }} of {{ totalPages }}</p>
-        <button v-if="currentPage < totalPages" v-on:click="nextPage">
-          Next
-        </button>
+        <button v-if="currentPage < totalPages" v-on:click="nextPage">Next</button>
       </div>
     </div>
   </div>
@@ -91,7 +87,12 @@ export default Vue.extend({
     this.error = null;
     this.apis = [];
     this.loading = true;
-    this.fetchAllAPIs();
+    await this.fetchAllAPIs();
+    // this.apis.map(async (api) => {
+    //   const response = await fetch(api.Link);
+    //   const body = await response.json();
+    //   console.log(body);
+    // });
   },
   methods: {
     async fetchAllAPIs() {
@@ -112,9 +113,13 @@ export default Vue.extend({
     },
     nextPage() {
       this.$router.push(`?page=${this.currentPage + 1}`);
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
     prevPage() {
       this.$router.push(`?page=${this.currentPage - 1}`);
+      document.body.scrollTop = 0; // For Safari
+      document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     },
     getCurrentPage() {
       this.currentPage = this.$route.query.page
