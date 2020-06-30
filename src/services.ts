@@ -1,3 +1,5 @@
+import url from '@/url';
+
 export type Api = {
   API: string;
   Description: string;
@@ -79,7 +81,7 @@ export function stringToColour(str: string): string {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
   }
   const index = Math.abs(hash) % colors.length;
-  return colors[index] + '88';
+  return colors[index];
 }
 
 const colors = [
@@ -88,19 +90,15 @@ const colors = [
   '#FE840E',
   '#FF6F61',
   '#C62168',
-  '#FFD662',
   '#00539C',
   '#E8B5CE',
-  '#D2C29D',
-  '#F0EAD6',
   '#9B1B30',
   '#77212E',
-  '#F5D6C6',
   '#FA9A85',
   '#CE5B78',
   '#E08119',
   '#2A4B7C',
   '#577284',
+  '#42b983',
   '#F96714',
-  '#F3E0BE',
 ];

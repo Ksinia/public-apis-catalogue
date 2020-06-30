@@ -18,7 +18,9 @@ import { Api, stringToColour } from '@/services';
 
 export default Vue.extend({
   data() {
-    return { color: { 'background-color': stringToColour(this.api.Category) } };
+    return {
+      color: { 'background-color': stringToColour(this.api.Category) + '88' },
+    };
   },
   name: 'SingleAPI',
   props: {
@@ -45,6 +47,9 @@ export default Vue.extend({
   height: 150px;
   display: flex;
   flex-direction: column;
+}
+.api:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 .tile-header {
   border-bottom: 1px solid lightgrey;

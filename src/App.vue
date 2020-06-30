@@ -11,7 +11,9 @@
       <a href="https://ksinia.net/cv/gulyaeva.html">Ksenia Gulyaeva</a>
       {{ new Date().getFullYear() }}
       |
-      <a href="https://github.com/Ksinia/public-apis-catalogue">Source Code</a>
+      <a
+        href="https://github.com/Ksinia/public-apis-catalogue"
+      >Source Code</a>
       |
       <a href="/sitemap.xml">Sitemap</a>
     </footer>
@@ -52,8 +54,15 @@ body {
 
 footer {
   text-align: center;
-  margin-top: 2rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
   color: grey;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
 a {
   color: #42b983;
