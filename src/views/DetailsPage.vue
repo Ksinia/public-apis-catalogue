@@ -92,12 +92,15 @@ export default Vue.extend({
 
 <style scoped>
 .details-page {
-  padding-top: 2.5rem;
+  padding-top: 3rem;
 }
 .additional-content {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
+}
+h1 {
+  margin-top: 0;
 }
 a {
   color: #42b983;

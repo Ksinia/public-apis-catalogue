@@ -37,7 +37,6 @@ body {
   width: 100%;
   padding: 10px;
   position: fixed;
-  /* top: 0px; */
   z-index: 999;
   background-color: white;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -63,5 +62,19 @@ footer {
 }
 a {
   color: #42b983;
+}
+button {
+  background-color: #42b983;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  color: #2c3e50;
+  padding: 0.5rem;
+  margin-bottom: 2rem;
+  margin: auto 1rem;
+  font-family: inherit;
+  font-size: medium;
+}
+button:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 </style>

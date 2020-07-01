@@ -85,18 +85,13 @@ export default Vue.extend({
       return Math.ceil(this.filteredApis.length / 10);
     },
   },
-  async created() {
+  created() {
     // fetch the data when the view is created and the data is
     // already being observed
     this.error = null;
     this.apis = [];
     this.loading = true;
-    await this.fetchAllAPIs();
-    // this.apis.map(async (api) => {
-    //   const response = await fetch(api.Link);
-    //   const body = await response.json();
-    //   console.log(body);
-    // });
+    this.fetchAllAPIs();
   },
   methods: {
     async fetchAllAPIs() {
@@ -167,10 +162,6 @@ export default Vue.extend({
   margin: auto;
   justify-content: center;
 }
-.pages button {
-  margin: 1rem;
-  color: #2c3e50;
-}
 .content {
   display: flex;
   flex-flow: row wrap;
@@ -180,6 +171,11 @@ export default Vue.extend({
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin: auto;
+  width: fit-content;
+}
+.filters div {
+  margin: auto 0.1rem;
 }
 .sorting > * {
   margin: 0 0.2rem;

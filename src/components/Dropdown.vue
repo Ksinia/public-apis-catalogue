@@ -5,9 +5,9 @@
       @change="$emit('change', $event.target.name, $event.target.value)"
       v-bind:name="property"
     >
-      <option v-for="option in options" v-bind:key="option">{{
-        option
-      }}</option>
+      <option v-for="option in options" v-bind:key="option">
+        {{ option }}
+      </option>
     </select>
   </div>
 </template>
@@ -25,8 +25,5 @@ export default {
 <style>
 label {
   margin: 0.2rem;
-}
-select {
-  margin-right: 1rem;
 }
 </style>

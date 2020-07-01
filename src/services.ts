@@ -41,10 +41,10 @@ export function getOptions(apis: Api[]): Options {
       return acc;
     },
     {
+      Category: ['all'],
       Auth: ['all'],
       HTTPS: ['all', true, false],
       Cors: ['all'],
-      Category: ['all'],
     }
   );
 }
@@ -68,13 +68,16 @@ export function filterApis(
     return true;
   });
   if (sortingAscending) {
-    filtered.sort();
+    filtered.sort((a, b) => (a.API > b.API ? 1 : -1));
   } else {
-    filtered.reverse();
+    filtered.sort((a, b) => (a.API < b.API ? 1 : -1));
   }
   return filtered;
 }
 
+/**
+ * Returns a color from colors array for a given string
+ */
 export function stringToColour(str: string): string {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
